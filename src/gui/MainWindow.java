@@ -56,9 +56,6 @@ import javax.swing.JFileChooser;
 import org.rauschig.jarchivelib.Archiver;
 import org.rauschig.jarchivelib.ArchiverFactory;
 
-import macos.MacAboutHandler;
-import macos.MacPreferencesHandler;
-import macos.MacQuitHandler;
 import telemetry.BitArrayLayout;
 import telemetry.FramePart;
 import telemetry.LayoutLoadException;
@@ -66,7 +63,6 @@ import telemetry.SatPayloadStore;
 import telemetry.SortedFramePartArrayList;
 import telemetry.uw.UwCanPacket;
 
-import com.apple.eawt.Application;
 
 /**
  * 
@@ -93,7 +89,7 @@ import com.apple.eawt.Application;
 @SuppressWarnings("serial")
 public class MainWindow extends JFrame implements ActionListener, ItemListener, WindowListener, WindowStateListener {
 	
-	static Application macApplication;
+	//static Application macApplication;
 	
 	static UpdateManager updateManager;
 	Thread updateManagerThread;
@@ -183,12 +179,12 @@ public class MainWindow extends JFrame implements ActionListener, ItemListener, 
 		    }
 		});
 	
-		if (Config.isMacOs()) {
-			macApplication = com.apple.eawt.Application.getApplication();
-			macApplication.setAboutHandler(new MacAboutHandler());
-			macApplication.setPreferencesHandler(new MacPreferencesHandler());
-			macApplication.setQuitHandler(new MacQuitHandler(this));
-		}
+//		if (Config.isMacOs()) {
+//			macApplication = com.apple.eawt.Application.getApplication();
+//			macApplication.setAboutHandler(new MacAboutHandler());
+//			macApplication.setPreferencesHandler(new MacPreferencesHandler());
+//			macApplication.setQuitHandler(new MacQuitHandler(this));
+//		}
 		
 		initMenu();
 		
