@@ -501,13 +501,13 @@ public class MainWindow extends JFrame implements ActionListener, ItemListener, 
 
 		mnFile.addSeparator();
 		
-		if (!Config.isMacOs()) {
+//		if (!Config.isMacOs()) {
 			mntmSettings = new JMenuItem("Settings");
 			mnFile.add(mntmSettings);
 			mntmSettings.addActionListener(this);
 
 			mnFile.addSeparator();
-		}
+//		}
 		mntmExit = new JMenuItem("Exit");
 		mnFile.add(mntmExit);
 		mntmExit.addActionListener(this);
@@ -576,11 +576,11 @@ public class MainWindow extends JFrame implements ActionListener, ItemListener, 
 		//mntmSoftware = new JMenuItem("Latest Software");
 		//mnHelp.add(mntmSoftware);
 		//mntmSoftware.addActionListener(this);
-		if (!Config.isMacOs()) {
+//		if (!Config.isMacOs()) {
 			mntmAbout = new JMenuItem("About FoxTelem");
 			mnHelp.add(mntmAbout);
 			mntmAbout.addActionListener(this);
-		}
+//		}
 	}
 
 	/**
