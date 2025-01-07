@@ -454,17 +454,17 @@ public class DisplayModule extends JPanel implements ActionListener, MouseListen
 			}
 		}
 		
-		if (moduleType == DISPLAY_WOD) {
-			// We want to add a button for a sky plot.  This goes in the min column
-			for (int i=1; i < size; i++) {
-				minValue[i] = new JButton();
-				((JButton) minValue[i]).setMargin(new Insets(0,0,0,0));
-				
-				((JButton)minValue[i]).addActionListener(this);
-				((JButton)minValue[i]).setBackground(wodFontColor);
-				row[i].add(minValue[i]);
-			}
-		}
+//		if (moduleType == DISPLAY_WOD) {
+//			// We want to add a button for a sky plot.  This goes in the min column
+//			for (int i=1; i < size; i++) {
+//				minValue[i] = new JButton();
+//				((JButton) minValue[i]).setMargin(new Insets(0,0,0,0));
+//				
+//				((JButton)minValue[i]).addActionListener(this);
+//				((JButton)minValue[i]).setBackground(wodFontColor);
+//				row[i].add(minValue[i]);
+//			}
+//		}
 		
 		if (moduleType < DISPLAY_EXPERIMENT) {
 			JLabel minTitle = new JLabel("MIN");
