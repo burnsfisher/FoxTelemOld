@@ -430,6 +430,10 @@ public class SpacecraftEditPanel extends JPanel implements ActionListener, ItemL
 		double downlinkFreq = 0;
 		double minFreq = 0;
 		double maxFreq = 0;
+		if (sat.sourceFormat == null || sat.sourceFormat.length == 0 || sat.sourceFormat[this.sourceFormatSelected] == null) {
+			Log.errorDialog("ERROR", "Source Format is not defined.  Pick a source format before saving, otherwise this will not load correctly.");
+			return false;
+		}
 		try {
 			// MASTER File params
 			sat.foxId = Integer.parseInt(id.getText());

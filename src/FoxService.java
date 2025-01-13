@@ -1,4 +1,5 @@
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.ServerSocket;
@@ -10,6 +11,7 @@ import telemServer.WebServiceProcess;
 import telemetry.PayloadDbStore;
 import common.Config;
 import common.Log;
+import common.Spacecraft;
 
 /**
  * 
@@ -70,6 +72,8 @@ public class FoxService {
 		Log.setStdoutEcho(false); // everything goes in the server log.  Any messages to stdout or stderr are a serious bug of some kinds
 		
 		Config.currentDir = System.getProperty("user.dir"); //m.getCurrentDir(); 
+		Config.spacecraftDir = System.getProperty("user.dir") + File.separator + Spacecraft.SPACECRAFT_DIR;  
+
 		Config.serverInit(); // initialize and create the payload store.  This runs in a seperate thread to the GUI and the decoder
 
 		Log.println("Fox Webservice starting up on port " + port + ": " + WebServiceProcess.version);

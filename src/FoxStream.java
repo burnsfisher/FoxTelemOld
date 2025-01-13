@@ -1,4 +1,5 @@
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.ServerSocket;
@@ -8,6 +9,7 @@ import java.util.concurrent.Executors;
 
 import common.Config;
 import common.Log;
+import common.Spacecraft;
 import telemServer.ServerConfig;
 import telemStream.StreamProcess;
 
@@ -85,6 +87,8 @@ public class FoxStream {
 		Log.println("Listening on port: " + port);
 
 		Config.currentDir = System.getProperty("user.dir"); //m.getCurrentDir(); 
+		Config.spacecraftDir = System.getProperty("user.dir") + File.separator + Spacecraft.SPACECRAFT_DIR;  
+
 		Config.serverInit(); // initialize and create the payload store.  
 
 		ServerConfig.init();

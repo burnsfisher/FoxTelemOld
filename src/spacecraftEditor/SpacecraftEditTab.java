@@ -76,7 +76,7 @@ public class SpacecraftEditTab extends JPanel {
 			String targetFilename = "";
 			File sourceFile = new File(System.getProperty("user.dir") + File.separator + Spacecraft.SPACECRAFT_DIR 
 					+ File.separator + "templates" + File.separator + CURVES_TEMPLATE_FILENAME);
-			File targetFile = new File(Config.currentDir + File.separator + Spacecraft.SPACECRAFT_DIR + File.separator + CURVES_TEMPLATE_FILENAME);
+			File targetFile = new File(Config.spacecraftDir + File.separator + CURVES_TEMPLATE_FILENAME);
 			try {
 				SatPayloadStore.copyFile(sourceFile, targetFile);
 				targetFilename = targetFile.getName();
@@ -101,7 +101,7 @@ public class SpacecraftEditTab extends JPanel {
 			String targetFilename = "";
 			File sourceFile = new File(System.getProperty("user.dir") + File.separator + Spacecraft.SPACECRAFT_DIR 
 					+ File.separator + "templates"+ File.separator + MATH_EXPRESSIONS_TEMPLATE_FILENAME);
-			File targetFile = new File(Config.currentDir + File.separator + Spacecraft.SPACECRAFT_DIR + File.separator + MATH_EXPRESSIONS_TEMPLATE_FILENAME);
+			File targetFile = new File(Config.spacecraftDir + File.separator + MATH_EXPRESSIONS_TEMPLATE_FILENAME);
 			try {
 				SatPayloadStore.copyFile(sourceFile, targetFile);
 				targetFilename = targetFile.getName();

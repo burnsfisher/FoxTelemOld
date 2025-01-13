@@ -55,7 +55,8 @@ import uk.me.g4dpz.satellite.GroundStationPosition;
 public class Config {
 	public static Properties properties; // Java properties file for user defined values
 	public static String currentDir = "";  // this is the directory that the Jar file is in.  We read the spacecraft files from here
-	public static String editorCurrentDir = "";  // This is where the editor edits the spacecraft files
+	public static String spacecraftDir = "";  // this is the directory that the spacecraft files are in
+	public static String editorSpacecraftDir = "";  // This is where the editor edits the spacecraft files
 	public static MainWindow mainWindow;
 	static UpdateManager updateManager; // for server only
 	static Thread updateManagerThread; // for server only
@@ -305,6 +306,10 @@ public class Config {
 	//V1.12
 	static public String python = ""; // this is the name and optionally the full path to python interpreter
 	static public String payloadHeaderGenScript = "gen_header.py";
+	
+	//V1.13
+	static public boolean ignoreSpacecraftLoadErrors = false; // useful in the editor.  Is not saved.
+	
 	
 	public static boolean setup(String propertiesFileName) { 
 		Config.propertiesFileName = propertiesFileName;
@@ -789,7 +794,7 @@ public class Config {
 		// V1.12
 		properties.setProperty("debugRS", Boolean.toString(debugRS));
 		properties.setProperty("debugAudioLevels", Boolean.toString(debugAudioLevels));
-		properties.setProperty("editorCurrentDir", editorCurrentDir);
+		properties.setProperty("editorSpacecraftDir", editorSpacecraftDir);
 		properties.setProperty("python", python);
 		properties.setProperty("payloadHeaderGenScript", payloadHeaderGenScript);
 		
@@ -996,7 +1001,7 @@ public class Config {
 		// V1.12
 		debugRS = Boolean.parseBoolean(getProperty("debugRS"));
 		debugAudioLevels = Boolean.parseBoolean(getProperty("debugAudioLevels"));
-		editorCurrentDir = getProperty("editorCurrentDir");
+		editorSpacecraftDir = getProperty("editorSpacecraftDir");
 		python = getProperty("python");
 		payloadHeaderGenScript = getProperty("payloadHeaderGenScript");
 		

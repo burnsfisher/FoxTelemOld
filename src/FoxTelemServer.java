@@ -15,6 +15,7 @@ import telemetry.PayloadDbStore;
 import telemetry.frames.Frame;
 import common.Config;
 import common.Log;
+import common.Spacecraft;
 
 /**
  * FOX 1 Telemetry Server
@@ -106,6 +107,8 @@ public class FoxTelemServer {
 		Log.println("Listening on port: " + port);
 
 		Config.currentDir = System.getProperty("user.dir"); //m.getCurrentDir(); 
+		Config.spacecraftDir = System.getProperty("user.dir") + File.separator + Spacecraft.SPACECRAFT_DIR;  
+
 		Config.serverInit(); // initialize and create the payload store.  
 
 		ServerConfig.init();

@@ -106,7 +106,7 @@ public class PayloadListEditPanel extends JPanel implements MouseListener, Actio
 				sat.layout[j] = null;
 			} else {
 				sat.layoutFilename[j] = (String)layoutsListTableModel.getValueAt(j,2);
-				sat.layout[j] = new BitArrayLayout(Config.currentDir + File.separator + Spacecraft.SPACECRAFT_DIR +File.separator + sat.layoutFilename[j]);
+				sat.layout[j] = new BitArrayLayout(Config.spacecraftDir + File.separator + sat.layoutFilename[j]);
 				sat.layout[j].name = (String)layoutsListTableModel.getValueAt(j,1);
 				sat.layout[j].typeStr = (String)layoutsListTableModel.getValueAt(j,3);
 				sat.layout[j].shortTitle = (String)layoutsListTableModel.getValueAt(j,4);
@@ -485,7 +485,7 @@ public class PayloadListEditPanel extends JPanel implements MouseListener, Actio
 		
 		
 		try {
-			File dest = new File(Config.currentDir+"/spacecraft"+ File.separator + payloadFilename.getText());
+			File dest = new File(Config.spacecraftDir + payloadFilename.getText());
 			if (!dest.isFile()) {
 				File source = new File(System.getProperty("user.dir") + File.separator + Spacecraft.SPACECRAFT_DIR 
 						+ File.separator + "templates" + File.separator + PAYLOAD_TEMPLATE_FILENAME);
@@ -501,7 +501,7 @@ public class PayloadListEditPanel extends JPanel implements MouseListener, Actio
 			sat.layoutFilename = newLayoutFilenames;
 			
 			BitArrayLayout[] newLayouts = new BitArrayLayout[sat.numberOfLayouts+1];
-			newLayouts[sat.numberOfLayouts] = new BitArrayLayout(Config.currentDir + File.separator + Spacecraft.SPACECRAFT_DIR +File.separator + payloadFilename.getText());
+			newLayouts[sat.numberOfLayouts] = new BitArrayLayout(Config.spacecraftDir + File.separator + payloadFilename.getText());
 			newLayouts[sat.numberOfLayouts].name = payloadName.getText();
 			newLayouts[sat.numberOfLayouts].shortTitle = tabName.getText();
 			newLayouts[sat.numberOfLayouts].title = title.getText();
@@ -532,7 +532,7 @@ public class PayloadListEditPanel extends JPanel implements MouseListener, Actio
 	
 	private void browsePayload() {
 		Log.println("Browse for Payload ...");
-		File dir = new File(Config.currentDir+"/spacecraft");
+		File dir = new File(Config.spacecraftDir);
 		File file = SpacecraftEditorWindow.pickFile(dir, this, "Specify payload file", "Select", "csv");
 		if (file == null) return;
 		payloadFilename.setText(file.getName());
@@ -548,7 +548,7 @@ public class PayloadListEditPanel extends JPanel implements MouseListener, Actio
 			codeTextArea.setText("C code is generated with a python script.  Setup the script name on File > Setings screen");
 			return;
 		}
-		File layout = new File(Config.currentDir+"/spacecraft"+ File.separator + payloadFilename.getText());
+		File layout = new File(Config.spacecraftDir + File.separator + payloadFilename.getText());
 		
 		if (!layout.isFile()) {
 			Log.errorDialog("ERROR", "Select a row with a valid payload file\n");
@@ -651,7 +651,7 @@ public class PayloadListEditPanel extends JPanel implements MouseListener, Actio
 			if (sat.numberOfLayouts == 0) return;
 			
 			try {
-				sat.layout[row] = new BitArrayLayout(Config.currentDir + File.separator + Spacecraft.SPACECRAFT_DIR +File.separator + payloadFilename.getText());
+				sat.layout[row] = new BitArrayLayout(Config.spacecraftDir +File.separator + payloadFilename.getText());
 				sat.layoutFilename[row] = payloadFilename.getText();
 				sat.layout[row].name = payloadName.getText();
 				sat.layout[row].shortTitle = tabName.getText();
@@ -685,7 +685,7 @@ public class PayloadListEditPanel extends JPanel implements MouseListener, Actio
 			if (n == JOptionPane.NO_OPTION) {
 				
 			} else {
-				File file = new File(Config.currentDir+"/spacecraft" +File.separator + payloadFilename.getText());
+				File file = new File(Config.spacecraftDir + payloadFilename.getText());
 				try {
 					SatPayloadStore.remove(file.getAbsolutePath());
 				} catch (IOException ef) {
@@ -759,7 +759,7 @@ public class PayloadListEditPanel extends JPanel implements MouseListener, Actio
 			int col = payloadsTable.columnAtPoint(e.getPoint());
 			if (row >= 0 && col >= 0) {
 				Log.println("PRESSED ROW: "+row+ " and COL: " + col + " COUNT: " + e.getClickCount());
-				String masterFolder = Config.currentDir + File.separator + Spacecraft.SPACECRAFT_DIR;
+				String masterFolder = Config.spacecraftDir;
 				
 				updateTabs(row);
 				payloadsTable.setRowSelectionInterval(row, row);

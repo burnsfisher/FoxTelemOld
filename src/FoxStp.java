@@ -1,7 +1,9 @@
+import java.io.File;
 import java.io.IOException;
 
 import common.Config;
 import common.Log;
+import common.Spacecraft;
 import telemServer.StpFileProcessException;
 import telemetry.Format.FormatFrame;
 import telemetry.frames.Frame;
@@ -24,6 +26,8 @@ public class FoxStp {
 		Log.setStdoutEcho(false); // everything goes to stdout or stderr if this is true
 		
 		Config.currentDir = System.getProperty("user.dir"); //m.getCurrentDir(); 
+		Config.spacecraftDir = System.getProperty("user.dir") + File.separator + Spacecraft.SPACECRAFT_DIR;  
+
 		Config.foxTelemCalcsPosition = false;  // make sure we dont try to get TLEs
 		Config.basicInit(); // initialize sequence and spacecraft.  No storage.
 

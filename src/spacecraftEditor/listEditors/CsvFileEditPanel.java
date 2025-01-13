@@ -173,7 +173,7 @@ public abstract class CsvFileEditPanel extends JPanel implements ActionListener,
 	
 	protected void load() throws FileNotFoundException, LayoutLoadException {
 		String line;
-		String fileName = Config.currentDir + File.separator + "spacecraft" +File.separator + filename;
+		String fileName = Config.spacecraftDir + File.separator + filename;
 	//	File aFile = new File(fileName);
 		
 		Log.println("Loading CSV File: "+ fileName);
@@ -198,6 +198,7 @@ public abstract class CsvFileEditPanel extends JPanel implements ActionListener,
 				}
 			}
 			setData();
+			updateSpacecraft();
 		} catch (NumberFormatException e) {
 			Log.errorDialog("ERROR", "Error processing the CSV file\n" + e);
 		} catch (IOException e) {
@@ -222,7 +223,7 @@ public abstract class CsvFileEditPanel extends JPanel implements ActionListener,
 			Log.infoDialog("INFO", "Pick a filename to save this to first");
 			return;
 		}
-		String fileName = Config.currentDir + File.separator +  "spacecraft" + File.separator + filename;
+		String fileName = Config.spacecraftDir + File.separator + filename;
 		BufferedWriter dis = new BufferedWriter(new FileWriter(fileName,false)); // overwrite the existing file
 		try {
 			for (int j = 0; j < dataLines.size(); j++) {
@@ -266,7 +267,7 @@ public abstract class CsvFileEditPanel extends JPanel implements ActionListener,
 
 	private void browseFile() {
 		Log.println("Browse for File ...");
-		File dir = new File(Config.currentDir+"/spacecraft");
+		File dir = new File(Config.spacecraftDir);
 		File file = SpacecraftEditorWindow.pickFile(dir, this, "Specify file", "Select", FILE_EXT);
 		if (file == null) return;
 		csvFilename.setText(file.getName());

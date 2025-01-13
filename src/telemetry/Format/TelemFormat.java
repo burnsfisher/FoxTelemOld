@@ -59,7 +59,7 @@ public class TelemFormat {
 		try { 
 			String headerLayoutFilename = get(HEADER_LAYOUT_FILE);
 			if (headerLayoutFilename != null) {
-				headerLayout = new BitArrayLayout(Config.currentDir + File.separator + Spacecraft.SPACECRAFT_DIR +File.separator + headerLayoutFilename);
+				headerLayout = new BitArrayLayout(Config.spacecraftDir + File.separator + headerLayoutFilename);
 			} else
 				headerLayout = new BitArrayLayout();
 		} catch (Exception e) {

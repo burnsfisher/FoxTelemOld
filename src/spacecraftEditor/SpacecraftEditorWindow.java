@@ -3,6 +3,7 @@ import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.FileDialog;
+import java.awt.Font;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -48,8 +49,8 @@ import telemetry.SatPayloadStore;
  */
 public class SpacecraftEditorWindow extends JFrame implements WindowListener, ActionListener {
 	
-	public static final String VERSION_NUM = "1.01";
-	public static final String VERSION = VERSION_NUM + " - 30 Aug 2022";
+	public static final String VERSION_NUM = "1.02";
+	public static final String VERSION = VERSION_NUM + " - 12 Jan 2025";
 	public static final String MANUAL = "amsat_editor_manual.pdf";
 	public static final String HANDBOOK = "amsat_telemetry_designers_handbook.pdf";
 
@@ -162,7 +163,7 @@ public class SpacecraftEditorWindow extends JFrame implements WindowListener, Ac
 	}
 	
 	public static void displayDirs() {
-		lblHomeDir.setText( "  |  MASTER: " + Config.currentDir +File.separator+Spacecraft.SPACECRAFT_DIR +"  |  Home: " + Config.homeDirectory + "  |  Log files: " + Config.logFileDirectory);
+		lblHomeDir.setText( "  |  MASTER: " + Config.spacecraftDir  +"  |  Home: " + Config.homeDirectory + "  |  Log files: " + Config.logFileDirectory);
 	}
 	
 	public void addSpacecraftTabs() {
@@ -170,7 +171,7 @@ public class SpacecraftEditorWindow extends JFrame implements WindowListener, Ac
 		spacecraftTab = new SpacecraftEditTab[sats.size()];
 		for (int s=0; s<sats.size(); s++) {
 			spacecraftTab[s] = new SpacecraftEditTab(sats.get(s));
-
+			tabbedPane.setFont( new Font( "Dialog", Font.BOLD|Font.ITALIC, 18 ) );
 				tabbedPane.addTab( "<html><body leftmargin=1 topmargin=1 marginwidth=1 marginheight=1><b>" 
 						//			tabbedPane.addTab( ""  
 						+ sats.get(s).propertiesFile.getName() + "</b></body></html>", spacecraftTab[s] );
@@ -260,7 +261,7 @@ public class SpacecraftEditorWindow extends JFrame implements WindowListener, Ac
 		File destinationDir = null; // this is the log files spacecraft dir where the user settings go
 		File dir = null;
 
-		dir = new File(Config.currentDir+"/spacecraft");
+		dir = new File(Config.spacecraftDir);
 		if (!Config.logFileDirectory.equalsIgnoreCase("")) {
 			destinationDir = new File(Config.logFileDirectory+"/spacecraft");
 		} else {
@@ -348,18 +349,15 @@ public class SpacecraftEditorWindow extends JFrame implements WindowListener, Ac
 		File destinationDir = null;
 		File dir = null;
 
+		destinationDir = new File(Config.spacecraftDir);
+		if (!Config.logFileDirectory.equalsIgnoreCase("")) {
+			destinationDir = new File(Config.logFileDirectory+"/spacecraft");
+		} 	
+		
 		if (remove) {
-			dir = new File(Config.currentDir+"/spacecraft");
-			if (!Config.logFileDirectory.equalsIgnoreCase("")) {
-				dir = new File(Config.logFileDirectory+"/spacecraft");
-			} 		
+			dir = destinationDir;
 		} else {
-			dir = new File(Config.currentDir+"/spacecraft");
-			if (!Config.logFileDirectory.equalsIgnoreCase("")) {
-				destinationDir = new File(Config.logFileDirectory+"/spacecraft");
-			} else {
-				destinationDir = dir;
-			}
+			dir = new File(Config.spacecraftDir);
 		}
 		if (remove)
 			file = pickFile(dir, this, "Specify spacecraft (.dat) file to close", "Close Spacecraft", "dat");
@@ -386,6 +384,13 @@ public class SpacecraftEditorWindow extends JFrame implements WindowListener, Ac
 					}
 				}
 			}else {
+				if (!file.getParent().equalsIgnoreCase(Config.spacecraftDir)) {
+					Log.errorDialog("ERROR Adding File", "\nThis file is not in your current spacecraft dir\n"
+							+ "Spacecraft dir: " + Config.spacecraftDir + "\n"
+							+ "This files dir: " + file.getParent() + "\n"
+							+ "Copy the file in, along with any files it depends on and then open it");
+					return;
+				}
 				installSpacecraft(file, destinationDir);
 				refresh = true;
 			}

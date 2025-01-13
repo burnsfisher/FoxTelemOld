@@ -974,6 +974,7 @@ public class MainWindow extends JFrame implements ActionListener, ItemListener, 
 		}
 	}
 	
+	@SuppressWarnings("deprecation")
 	public void downloadServerData(ArrayList<Spacecraft> sats) {
 		String message = "Do you want to download server data to REPLACE your existing data?\n"
 				+ "THIS WILL OVERWRITE YOUR EXISTING LOG FILES. Switch to a new directory if you have live data received from FOX\n"
@@ -1104,12 +1105,12 @@ public class MainWindow extends JFrame implements ActionListener, ItemListener, 
 		File destinationDir = null;
 		File dir = null;
 		if (remove) {
-			dir = new File(Config.currentDir+"/spacecraft");
+			dir = new File(Config.spacecraftDir);
 			if (!Config.logFileDirectory.equalsIgnoreCase("")) {
 				dir = new File(Config.logFileDirectory+"/spacecraft");
 			} 		
 		} else {
-			dir = new File(Config.currentDir+"/spacecraft");
+			dir = new File(Config.spacecraftDir);
 			if (!Config.logFileDirectory.equalsIgnoreCase("")) {
 				destinationDir = new File(Config.logFileDirectory+"/spacecraft");
 			} else {

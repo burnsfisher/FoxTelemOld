@@ -75,7 +75,7 @@ public class SatelliteManager implements Runnable {
 	}
 	
 	public void init() {
-		File masterFolder = new File(Config.currentDir + File.separator + Spacecraft.SPACECRAFT_DIR);
+		File masterFolder = new File(Config.spacecraftDir);
 		loadFormats(masterFolder);
 		File folder = getFolder(masterFolder);
 		//File folder = new File("spacecraft");

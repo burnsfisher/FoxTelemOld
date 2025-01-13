@@ -326,7 +326,7 @@ public class Spacecraft implements Comparable<Spacecraft> {
 		}
 		} catch (IOException e) {
 			throw new LayoutLoadException("Could not load measurement layout.  Make sure it is installed\n"
-					+ "in folder:" + Config.currentDir+File.separator+"spacecraft\n" + e.getMessage());
+					+ "in folder:" + Config.spacecraftDir + "\n" + e.getMessage());
 		}
 		loadTleHistory(); // Dont call this until the Name and FoxId are set
 		positionCache = new SpacecraftPositionCache(foxId);
@@ -870,12 +870,12 @@ public class Spacecraft implements Comparable<Spacecraft> {
 			conversions = new HashMap<String, Conversion>();
 
 			if (conversionCurvesFileName != null) {
-				loadConversionCurves( Config.currentDir + File.separator +  Spacecraft.SPACECRAFT_DIR + File.separator + conversionCurvesFileName);
+				loadConversionCurves( Config.spacecraftDir + File.separator + conversionCurvesFileName);
 			}
 
 			
 			if (conversionExpressionsFileName != null) {
-				loadConversionExpresions( Config.currentDir + File.separator +  Spacecraft.SPACECRAFT_DIR + File.separator + conversionExpressionsFileName);
+				loadConversionExpresions( Config.spacecraftDir + File.separator + conversionExpressionsFileName);
 			}
 
 			// String Lookup Tables
@@ -984,7 +984,7 @@ public class Spacecraft implements Comparable<Spacecraft> {
 			sendLayoutLocally = new boolean[numberOfLayouts];
 			for (int i=0; i < numberOfLayouts; i++) {
 				layoutFilename[i] = getProperty("layout"+i+".filename");
-				layout[i] = new BitArrayLayout(Config.currentDir + File.separator + Spacecraft.SPACECRAFT_DIR +File.separator + layoutFilename[i]);
+				layout[i] = new BitArrayLayout(Config.spacecraftDir +File.separator + layoutFilename[i]);
 				
 				// Check that the conversions look valid -- any this should be re-factored into the Conversion class when I have time //TODO
 				if (useConversionCoeffs)
@@ -1000,12 +1000,12 @@ public class Spacecraft implements Comparable<Spacecraft> {
 							try {
 								int convInt = Integer.parseInt(singleConv);
 								if (convInt > BitArrayLayout.MAX_CONVERSION_NUMBER) {
-									throw new LayoutLoadException("Conversion number "+ convInt +" is not defined. "+ "Error in row for field: " + layout[i].fieldName[c] + " on row: " + c + "\nwhen processing layout: " + layoutFilename[i] );
+									if (!Config.ignoreSpacecraftLoadErrors)
+										throw new LayoutLoadException("Conversion number "+ convInt +" is not defined. "+ "Error in row for field: " + layout[i].fieldName[c] + " on row: " + c + "\nwhen processing layout: " + layoutFilename[i] );
 								}
 							} catch (NumberFormatException e) {
 								Conversion conv = this.getConversionByName(singleConv);
 								if (conv == null) {
-
 									String stem3 = "";
 									if (singleConv.length() >=3)
 										stem3 = singleConv.substring(0, 3); // first 3 characters to check for BIN, HEX
@@ -1023,7 +1023,8 @@ public class Spacecraft implements Comparable<Spacecraft> {
 											|| stem9.equalsIgnoreCase(Conversion.TIMESTAMP)) {
 										// we skip, this is applied in string formatting later
 									} else
-										throw new LayoutLoadException("Conversion '"+ convName +"' is not defined. "+ "Error in row for field: " + layout[i].fieldName[c] + " on row: " + c + "\nwhen processing layout: " + layoutFilename[i] );
+										if (!Config.ignoreSpacecraftLoadErrors)
+										    throw new LayoutLoadException("Conversion '"+ convName +"' is not defined. "+ "Error in row for field: " + layout[i].fieldName[c] + " on row: " + c + "\nwhen processing layout: " + layoutFilename[i] );
 								}
 							}
 						
@@ -1037,6 +1038,7 @@ public class Spacecraft implements Comparable<Spacecraft> {
 				if (hasFOXDB_V3) {
 					layout[i].number = i;
 					layout[i].typeStr = getProperty("layout"+i+".type");
+					if (!Config.ignoreSpacecraftLoadErrors)
 					if (!BitArrayLayout.isValidType(layout[i].typeStr)) {
 						throw new LayoutLoadException("Invalid payload type found: "+ layout[i].typeStr 
 								+ "\nfor payload: " + layout[i].name 
@@ -1341,7 +1343,7 @@ public class Spacecraft implements Comparable<Spacecraft> {
 			for (BitArrayLayout l : existingLayouts)
 				layout[i++] = l;
 			for (String frameName : canFrames.frame) {
-				layout[i] = new BitArrayLayout( Config.currentDir + File.separator + Spacecraft.SPACECRAFT_DIR +File.separator + this.canFileDir+ File.separator + frameName + ".csv");
+				layout[i] = new BitArrayLayout( Config.spacecraftDir + File.separator + this.canFileDir+ File.separator + frameName + ".csv");
 				layout[i].name = frameName;
 				layout[i].parentLayout = "cantelemetry"; // give it any name so that it has a parent and is not a top level "payload"
 				i++;

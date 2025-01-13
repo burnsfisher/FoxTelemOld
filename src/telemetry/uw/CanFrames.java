@@ -95,7 +95,7 @@ public class CanFrames {
 	protected void load(String f) throws FileNotFoundException, LayoutLoadException {
 
 		String line;
-		fileName =  Config.currentDir + File.separator +  "spacecraft" +File.separator + f;
+		fileName =  Config.spacecraftDir +File.separator + f;
 		//	File aFile = new File(fileName);
 
 		Log.println("Loading Can Frames: "+ fileName);

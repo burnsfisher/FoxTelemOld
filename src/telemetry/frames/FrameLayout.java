@@ -26,7 +26,7 @@ public class FrameLayout {
 	
 	public FrameLayout(int foxId, String fileName) throws LayoutLoadException {
 		properties = new Properties();
-		this.fileName = Config.currentDir + File.separator + Spacecraft.SPACECRAFT_DIR + File.separator + fileName;
+		this.fileName = Config.spacecraftDir + File.separator + fileName;
 		this.foxId = foxId;
 		propertiesFile = new File(this.fileName);
 		payloadNames = new HashMap<Integer,String>();

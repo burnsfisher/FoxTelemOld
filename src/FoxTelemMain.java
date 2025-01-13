@@ -20,6 +20,7 @@ import javax.swing.UIManager;
 
 import common.Config;
 import common.Log;
+import common.Spacecraft;
 import decoder.Decoder;
 import decoder.FoxFskDecoder;
 import decoder.SourceWav;
@@ -630,7 +631,8 @@ public class FoxTelemMain {
 		
 		Log.init("FoxTelemDecoder");
 		
-		Config.currentDir = System.getProperty("user.dir"); //m.getCurrentDir(); 
+		Config.currentDir = System.getProperty("user.dir");
+		Config.spacecraftDir = System.getProperty("user.dir") + File.separator + Spacecraft.SPACECRAFT_DIR;  
 				
 		Config.init(logFileDir); // initialize, create properties if needed, load properties and create the payload store.  This runs in a seperate thread to the GUI and the decoder
 		Log.println("************************************************************");

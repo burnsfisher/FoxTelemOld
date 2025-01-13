@@ -28,6 +28,7 @@ public class AmsatSpacecraftEditor {
 			}
 			arg++;
 		}
+		Config.ignoreSpacecraftLoadErrors = true;
 		if (logFileDir == null)
 			Config.homeDirectory = System.getProperty("user.home") + File.separator + ".FoxTelem";
 		else
@@ -51,10 +52,10 @@ public class AmsatSpacecraftEditor {
 		Log.init("AmsatEditor");
 		
 		Config.minInit(logFileDir);
-		Config.currentDir = Config.editorCurrentDir;
+		Config.currentDir = System.getProperty("user.dir"); //m.getCurrentDir(); 
+		Config.spacecraftDir = Config.editorSpacecraftDir;
 		Config.initSatelliteManager();
-		
-		
+
 		SpacecraftEditorWindow editor = new SpacecraftEditorWindow();
 		editor.setVisible(true);
 	}

@@ -281,7 +281,7 @@ public abstract class TableListEditPanel extends JPanel implements MouseListener
 		String[] dataToAdd = new String[listTableModel.getColumnCount()];
 		boolean fileSet = false;
 		try {
-			File dest = new File(Config.currentDir+"/spacecraft"+ File.separator + txtFilename.getText());
+			File dest = new File(Config.spacecraftDir + txtFilename.getText());
 			if (!dest.isFile()) {
 				File source = new File(System.getProperty("user.dir") + File.separator + Spacecraft.SPACECRAFT_DIR 
 						+ File.separator + "templates" + File.separator + TEMPLATE_FILENAME);
@@ -337,7 +337,7 @@ public abstract class TableListEditPanel extends JPanel implements MouseListener
 		if (n == JOptionPane.NO_OPTION) {
 			
 		} else {
-			File file = new File(Config.currentDir+"/spacecraft" +File.separator + txtFilename.getText());
+			File file = new File(Config.spacecraftDir + txtFilename.getText());
 			try {
 				SatPayloadStore.remove(file.getAbsolutePath());
 			} catch (IOException ef) {
@@ -414,7 +414,7 @@ public abstract class TableListEditPanel extends JPanel implements MouseListener
 
 	protected void browseListItem() {
 		Log.println("Browse for list item filename ...");
-		File dir = new File(Config.currentDir+"/spacecraft");
+		File dir = new File(Config.spacecraftDir);
 		File file = SpacecraftEditorWindow.pickFile(dir, this, "Specify file", "Select", FILE_EXT);
 		if (file == null) return;
 		txtFilename.setText(file.getName());

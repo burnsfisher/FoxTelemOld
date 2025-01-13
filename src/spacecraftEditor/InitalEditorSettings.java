@@ -271,13 +271,13 @@ public class InitalEditorSettings extends JDialog implements ActionListener, Win
 			}
 		} 
 		
-		if (!Config.editorCurrentDir.equalsIgnoreCase(txtMasterFileDirectory.getText())) {
+		if (!Config.editorSpacecraftDir.equalsIgnoreCase(txtMasterFileDirectory.getText())) {
 			// user changed the MASTER directory
 			File file = new File(txtMasterFileDirectory.getText());
 			if (!file.isDirectory() || file == null || !file.exists()){
 			    Log.errorDialog("Invalid directory", "Can not find the specified directory: " + txtMasterFileDirectory.getText());
 			} else {
-				Config.editorCurrentDir = txtMasterFileDirectory.getText();
+				Config.editorSpacecraftDir = txtMasterFileDirectory.getText();
 				this.dispose();
 			}
 		} 

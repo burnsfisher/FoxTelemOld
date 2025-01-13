@@ -32,8 +32,8 @@ public class SourceTableListEditPanel extends TableListEditPanel {
 	public SourceTableListEditPanel(Spacecraft sat, String title, ListTableModel listTableModel,
 			CsvTableModel csvTableModel, SpacecraftEditPanel parent) {
 		super(sat, title, listTableModel, csvTableModel, "format", parent);
-		txtFilename.setEditable(true);
-		lFilename.setText("Format");
+		txtFilename.setEditable(false);
+		lFilename.setText("File");
 		
 		leftPanel.setLayout(new BoxLayout(leftPanel, BoxLayout.Y_AXIS));
 		
@@ -79,14 +79,14 @@ public class SourceTableListEditPanel extends TableListEditPanel {
 	@Override
 	protected void browseListItem() {
 		Log.println("Browse for Source filename ...");
-		File dir = new File(Config.currentDir+"/spacecraft");
+		File dir = new File(Config.spacecraftDir);
 		File file = SpacecraftEditorWindow.pickFile(dir, this, "Specify file", "Select", "format");
 		if (file == null) return;
 
 		String fileName = file.getName();
 		try {
 			@SuppressWarnings("unused")
-			TelemFormat tmpFormat = new TelemFormat(Config.currentDir + File.separator + "spacecraft" + File.separator + fileName);
+			TelemFormat tmpFormat = new TelemFormat(Config.spacecraftDir + File.separator + fileName);
 			txtFilename.setText(tmpFormat.name);
 		} catch (LayoutLoadException e) {
 			Log.errorDialog("ERROR", "Can not parse the format from format file: \n" + fileName + "\n" + e);
@@ -173,6 +173,7 @@ public class SourceTableListEditPanel extends TableListEditPanel {
 	private void updateSourceStats(int row) {
 		if (sat.sourceFormat == null) return;
 		if (sat.sourceFormat.length == 0) return;
+		if (sat.sourceFormat[row] == null) return;
 		int numRsWords = sat.sourceFormat[row].getInt(TelemFormat.RS_WORDS);
 		int headerLength = sat.sourceFormat[row].getInt(TelemFormat.HEADER_LENGTH);
 		int frameLength = sat.sourceFormat[row].getFrameLength();

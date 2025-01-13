@@ -124,7 +124,7 @@ public class ConversionStringLookUpTable extends Conversion{
 	protected void load(String fileName) throws FileNotFoundException, LayoutLoadException {
 
 		String line;
-		fileName = Config.currentDir +File.separator + "spacecraft" +File.separator + fileName;
+		fileName = Config.spacecraftDir + File.separator + fileName;
 		//File aFile = new File(fileName);
 		
 		Log.println("Loading lookup table: "+ fileName);

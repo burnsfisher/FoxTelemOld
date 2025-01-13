@@ -269,7 +269,7 @@ public class FrameListEditPanel extends JPanel implements MouseListener, ActionL
 		sat.frameLayoutFilename = newFrameLayoutFilenames;
 		
 		try {
-			File dest = new File(Config.currentDir+"/spacecraft"+ File.separator + frameFilename.getText());
+			File dest = new File(Config.spacecraftDir + frameFilename.getText());
 			if (!dest.isFile()) {
 				File source = new File(System.getProperty("user.dir") + File.separator + Spacecraft.SPACECRAFT_DIR 
 						+ File.separator + "templates" + File.separator + FRAME_TEMPLATE_FILENAME);
@@ -301,7 +301,7 @@ public class FrameListEditPanel extends JPanel implements MouseListener, ActionL
 	
 	private void browseFrame() {
 		System.out.println("Browse for Frame ...");
-		File dir = new File(Config.currentDir+"/spacecraft");
+		File dir = new File(Config.spacecraftDir);
 		File file = SpacecraftEditorWindow.pickFile(dir, this, "Specify frame file", "Select", "frame");
 		if (file == null) return;
 		frameFilename.setText(file.getName());
@@ -462,7 +462,7 @@ public class FrameListEditPanel extends JPanel implements MouseListener, ActionL
 			if (n == JOptionPane.NO_OPTION) {
 				
 			} else {
-				File file = new File(Config.currentDir+"/spacecraft" +File.separator + frameFilename.getText());
+				File file = new File(Config.spacecraftDir + frameFilename.getText());
 				System.out.println("Removing: " +file.getAbsolutePath());
 				try {
 					SatPayloadStore.remove(file.getAbsolutePath());
@@ -523,7 +523,7 @@ public class FrameListEditPanel extends JPanel implements MouseListener, ActionL
 			if (row >= 0 && col >= 0) {
 				Log.println("CLICKED ROW: "+row+ " and COL: " + col + " COUNT: " + e.getClickCount());
 
-				String masterFolder = Config.currentDir + File.separator + Spacecraft.SPACECRAFT_DIR;
+				String masterFolder = Config.spacecraftDir;
 				
 				if (e.getClickCount() == 2) {
 

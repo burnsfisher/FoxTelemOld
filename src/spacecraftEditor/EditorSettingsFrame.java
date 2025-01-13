@@ -134,7 +134,7 @@ public class EditorSettingsFrame extends JDialog implements ActionListener, Item
 		lblServerUrl.setBorder(new EmptyBorder(5, 2, 5, 5) );
 		northpanelB.add(lblServerUrl, BorderLayout.WEST);
 		
-		txtMasterFileDirectory = new JTextField(Config.currentDir + File.separator + Spacecraft.SPACECRAFT_DIR);
+		txtMasterFileDirectory = new JTextField(Config.spacecraftDir);
 		northpanelB.add(txtMasterFileDirectory, BorderLayout.CENTER);
 		txtMasterFileDirectory.setColumns(30);
 		
@@ -253,17 +253,17 @@ public class EditorSettingsFrame extends JDialog implements ActionListener, Item
 			boolean refreshTabs = false;
 			//boolean refreshGraphs = false;
 
-			String testString = Config.currentDir + File.separator+"spacecraft";
+			String testString = Config.spacecraftDir;
 			if (!testString.equalsIgnoreCase(txtMasterFileDirectory.getText())) {
 				File file = new File(txtMasterFileDirectory.getText());
 				if ((!file.isDirectory() || file == null || !file.exists())){
-					Log.errorDialog("Invalid directory", "Can not find the specified directory: " + txtMasterFileDirectory.getText());
+					Log.errorDialog("Invalid directory", "Can not find the specified MASTER file directory: " + txtMasterFileDirectory.getText());
 					dispose = false;
 					//refreshGraphs=false;
-				} else if (!txtMasterFileDirectory.getText().matches(".*"+File.separator+"spacecraft$")) {
-					Log.errorDialog("Invalid directory", "Master file directory must be called 'spacecraft' :\n" + txtMasterFileDirectory.getText());
-					dispose = false;
-					//refreshGraphs=false;
+//				} else if (!txtMasterFileDirectory.getText().matches(".*"+File.separator+"spacecraft$")) {
+//					Log.errorDialog("Invalid directory", "Master file directory must be called 'spacecraft' :\n" + txtMasterFileDirectory.getText());
+//					dispose = false;
+//					//refreshGraphs=false;
 				} else {
 					Object[] options = {"Yes",
 					"No"};
@@ -279,10 +279,9 @@ public class EditorSettingsFrame extends JDialog implements ActionListener, Item
 
 					if (n == JOptionPane.YES_OPTION) {
 						String txt = txtMasterFileDirectory.getText();
-						String newDir = txt.replaceAll(File.separator+"spacecraft$", "");
-						Config.editorCurrentDir = newDir;
-						Config.currentDir = newDir;
-						Log.println("Setting MASTER directory to: " + Config.currentDir + File.separator + Spacecraft.SPACECRAFT_DIR);
+						Config.editorSpacecraftDir = txt;
+						Config.spacecraftDir = txt;
+						Log.println("Setting MASTER directory to: " + Config.spacecraftDir);
 						SpacecraftEditorWindow.displayDirs();
 						Config.initSatelliteManager();
 					
@@ -362,8 +361,8 @@ public class EditorSettingsFrame extends JDialog implements ActionListener, Item
 		}
 		if (e.getSource() == btnBrowseMaster) {
 			File initialdir = null;
-			if (!Config.currentDir.equalsIgnoreCase("")) {
-				initialdir = new File(Config.currentDir);
+			if (!Config.spacecraftDir.equalsIgnoreCase("")) {
+				initialdir = new File(Config.spacecraftDir);
 			}
 			String dir = pickDir(initialdir);
 			txtMasterFileDirectory.setText(dir);			
