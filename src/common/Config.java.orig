@@ -67,8 +67,13 @@ public class Config {
 	
 	public static ProgressPanel fileProgress;
 	
+<<<<<<< HEAD
 	public static String VERSION_NUM = "1.13f";
 	public static String VERSION = VERSION_NUM + " - 12 Jan 2025";
+=======
+	public static String VERSION_NUM = "1.12z7";
+	public static String VERSION = VERSION_NUM + " - 13 Sep 2024";
+>>>>>>> 1.12
 	public static String propertiesFileName = "FoxTelem.properties"; // this will be the name if setup() is not called with a different name
 	
 	public static final String WINDOWS = "win";
@@ -190,7 +195,11 @@ public class Config {
     
     // Server
     public static int serverTxPeriod = 5; // time in 100 msec chunks
+<<<<<<< HEAD
+    public static int serverRetryWaitPeriod = 10; // time in multiples of TxPeriod
+=======
     public static int serverRetryWaitPeriod = 10; // time in multiples of TxPeriod - remove from the saved file as this is not configurable by end user
+>>>>>>> 1.12
     static public boolean uploadToServer = false;
     public static String primaryServer = "tlm.amsat.org";
     public static String secondaryServer = "tlm.amsat.org"; // currently no secondary server so just retry the primary

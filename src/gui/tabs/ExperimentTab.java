@@ -20,7 +20,6 @@ import javax.swing.JTable;
 import javax.swing.KeyStroke;
 import javax.swing.table.AbstractTableModel;
 import common.Config;
-import telemetry.legacyPayloads.PayloadRadExpData;
 
 /**
  * 
@@ -48,7 +47,7 @@ public abstract class ExperimentTab extends ModuleTab implements MouseListener {
 
 	protected JPanel topPanel;
 	protected JPanel centerPanel;
-	PayloadRadExpData radPayload;
+//	PayloadRadExpData radPayload;
 	protected JTable table;
 	protected JTable table2;
 	protected JScrollPane scrollPane2;
