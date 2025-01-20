@@ -420,7 +420,7 @@ public abstract class FramePart extends BitArray implements Comparable<FramePart
 		case BitArrayLayout.EXP:
 			return new PayloadExperiment(layout, id, uptime, resets);
 		case BitArrayLayout.WOD_EXP:
-			return new PayloadWODExperiment(layout, id, uptime, resets);
+			return new PayloadWODExperiment(layout);
 		case BitArrayLayout.CAN_EXP:
 			return new PayloadCanExperiment(layout, id, uptime, resets);
 		case BitArrayLayout.CAN_WOD_EXP:
@@ -481,7 +481,7 @@ public abstract class FramePart extends BitArray implements Comparable<FramePart
 			if (layout.isExperiment())
 				return new PayloadExperiment(layout, id, uptime, resets);
 			if (layout.isWODExperiment())
-				return new PayloadWODExperiment(layout, id, uptime, resets);
+				return new PayloadWODExperiment(layout);
 
 			return null;
 		}

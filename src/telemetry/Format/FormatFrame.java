@@ -286,7 +286,7 @@ import telemetry.uw.PayloadWODUwExperiment;
 			for (int i=0; i<payload.length; i++ ) {
 				if (payload[i] != null) {
 					payload[i].copyBitsToFields();
-					payload[i].resets = newReset;
+					payload[i].resets = newReset; // this seems like it would break WOD Records but copy Bits to Fields is called again in the save.  This code is legacy and should perhaps be stripped out as it was HuskySat specific
 					if (storeMode)
 						payload[i].newMode = header.newMode;
 					if (payload[i].layout.isCanExperiment() || payload[i].layout.isCanWodExperiment()) {
@@ -399,7 +399,7 @@ import telemetry.uw.PayloadWODUwExperiment;
 		@Override
 		public String toString() {
 			String s = new String();
-			s = s + "AMSAT FOX-1 BPSK Telemetry Captured at DATE: " + getStpDate() + "\n"; 
+			s = s + "AMSAT FOXTELEM Telemetry Captured at DATE: " + getStpDate() + "\n"; 
 			s = header.toString();
 			
 			if (payload != null) {
