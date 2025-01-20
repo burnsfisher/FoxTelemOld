@@ -125,7 +125,7 @@ public class MainWindow extends JFrame implements ActionListener, ItemListener, 
 	JMenuItem mntmLeaderboard;
 	JMenuItem mntmSoftware;
 	JMenuItem mntmAbout;
-	JMenuItem mntmSatAdd;
+	JMenuItem mntmSatAdd, mntmSatLoadKeps;
 	JMenuItem mntmSatRemove;
 //	JCheckBoxMenuItem chckbxmntmShowFilterOptions;
 	JCheckBoxMenuItem chckbxmntmShowDecoderOptions;
@@ -612,6 +612,10 @@ public class MainWindow extends JFrame implements ActionListener, ItemListener, 
 		
 		menuBar.add(mnSats);
 
+		mntmSatLoadKeps = new JMenuItem("Update KEPs");
+		mnSats.add(mntmSatLoadKeps);
+		mntmSatLoadKeps.addActionListener(this);
+		mnSats.addSeparator();
 		mntmSatAdd = new JMenuItem("Add");
 		mnSats.add(mntmSatAdd);
 		mntmSatAdd.addActionListener(this);
@@ -781,6 +785,10 @@ public class MainWindow extends JFrame implements ActionListener, ItemListener, 
 					f.setVisible(true);
 				//}
 			}
+		}
+		
+		if (e.getSource() == mntmSatLoadKeps) {
+			Config.satManager.fetchTLEFile();
 		}
 		
 		if (e.getSource() == mntmSatAdd) {

@@ -15,7 +15,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -514,13 +513,13 @@ public class SatelliteManager implements Runnable {
 		}
 		File f1 = new File(filetmp);
 		File f2 = new File(file);
-		Date lm = new Date(f2.lastModified());
-		Date now = new Date();
+//		Date lm = new Date(f2.lastModified());
+//		Date now = new Date();
 
-		if ((now.getTime() - lm.getTime() < RECENT_TIME)) { // then dont try to update it.  Date 0 means we could not get a date, so this will likely fail to process anyway
-			Log.println(".. keps were just downloaded, skipping check");
-			return;
-		}
+//		if ((now.getTime() - lm.getTime() < RECENT_TIME)) { // then dont try to update it.  Date 0 means we could not get a date, so this will likely fail to process anyway
+//			Log.println(".. keps were just downloaded, skipping check");
+//			return;
+//		}
 		
 		String msg = "Downloading new keps ...                 ";
 		ProgressPanel initProgress = null;
@@ -536,13 +535,13 @@ public class SatelliteManager implements Runnable {
 			website = new URL(urlString);
 			HttpURLConnection httpCon = (HttpURLConnection) website.openConnection();
 			httpCon.setReadTimeout(1000);
-			long date = httpCon.getLastModified();
+//			long date = httpCon.getLastModified();
 			httpCon.disconnect();
-			Date kepsDate = new Date(date);
-			if (date != 0 && (kepsDate.getTime() <= lm.getTime())) { // then dont try to update it.  Date 0 means we could not get a date, so this will likely fail to process anyway
-				Log.println(".. keps are current");
-				filetmp = file;
-			} else {
+//			Date kepsDate = new Date(date);
+//			if (date != 0 && (kepsDate.getTime() <= lm.getTime())) { // then dont try to update it.  Date 0 means we could not get a date, so this will likely fail to process anyway
+//				Log.println(".. keps are current");
+//				filetmp = file;
+//			} else {
 				Log.println(" ... open RBC ..");
 				rbc = Channels.newChannel(website.openStream());
 				Log.println(" ... open output file .." + filetmp);
@@ -553,7 +552,7 @@ public class SatelliteManager implements Runnable {
 				fos.close();
 				Log.println(" ... closing input stream ..");
 				rbc.close();
-			}
+//			}
 			File tmp = new File(filetmp);
 			if (tmp.exists()) {
 				// Always process the file because it is quick and the user may have changed the name of a spacecraft

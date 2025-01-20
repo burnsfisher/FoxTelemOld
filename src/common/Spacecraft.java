@@ -57,6 +57,7 @@ import uk.me.g4dpz.satellite.Satellite;
 import uk.me.g4dpz.satellite.SatelliteFactory;
 import uk.me.g4dpz.satellite.TLE;
 
+@SuppressWarnings("deprecation")
 public class Spacecraft implements Comparable<Spacecraft> {
 	public Properties properties; // Java properties file for user defined values
 	public File propertiesFile;

@@ -125,6 +125,7 @@ public class FcdProPlusPanel extends DevicePanel implements ItemListener, Action
 		ifFilterValue.setText(((FCD2TunerController) device).getIfFilter());	
 	}
 	
+	@SuppressWarnings("unused")
 	private void checkSettings() throws DeviceException {
 		// THIS DOES NOT WORK...
 		checkingSettings = true;

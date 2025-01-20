@@ -62,7 +62,6 @@ import org.usb4java.LibUsbException;
 
 import common.Config;
 import common.Log;
-import common.PassManager;
 import common.Spacecraft;
 import decoder.Decoder;
 import decoder.FoxFskDecoder;
