@@ -49,8 +49,8 @@ import telemetry.SatPayloadStore;
  */
 public class SpacecraftEditorWindow extends JFrame implements WindowListener, ActionListener {
 	
-	public static final String VERSION_NUM = "1.02";
-	public static final String VERSION = VERSION_NUM + " - 12 Jan 2025";
+	public static final String VERSION_NUM = "1.02a";
+	public static final String VERSION = VERSION_NUM + " - 21 Jan 2025";
 	public static final String MANUAL = "amsat_editor_manual.pdf";
 	public static final String HANDBOOK = "amsat_telemetry_designers_handbook.pdf";
 
@@ -385,10 +385,12 @@ public class SpacecraftEditorWindow extends JFrame implements WindowListener, Ac
 				}
 			}else {
 				if (!file.getParent().equalsIgnoreCase(Config.spacecraftDir)) {
-					Log.errorDialog("ERROR Adding File", "\nThis file is not in your current spacecraft dir\n"
-							+ "Spacecraft dir: " + Config.spacecraftDir + "\n"
+					Log.errorDialog("ERROR Adding File", "\nThis file is not in your current MASTER spacecraft dir\n"
+							+ "Your MASTER dir: " + Config.spacecraftDir + "\n"
 							+ "This files dir: " + file.getParent() + "\n"
-							+ "Copy the file in, along with any files it depends on and then open it");
+							+ "Copy the file in, along with any files it depends on and then open it again. Or change\n"
+							+ "you MASTER dir to this folder using the settings screen.  This is needed because there\n"
+							+ "are many files associated with a MASTER spacecraft file and they need to be in the same folder.");
 					return;
 				}
 				installSpacecraft(file, destinationDir);
