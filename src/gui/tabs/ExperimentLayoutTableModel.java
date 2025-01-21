@@ -1,6 +1,7 @@
 package gui.tabs;
 
 import telemetry.BitArrayLayout;
+import telemetry.payloads.PayloadWOD;
 
 /**
  * 
@@ -28,8 +29,13 @@ public class ExperimentLayoutTableModel extends FoxTelemTableModel {
 
 	public ExperimentLayoutTableModel(BitArrayLayout lay) {
 		columnNames = new String[lay.fieldName.length+2];
-		columnNames[0] = "EPOCH";
-		columnNames[1] = "UPTIME";
+		if (lay.isWODExperiment()) {
+			columnNames[0] = lay.getShortNameByName(PayloadWOD.WOD_RESETS);
+			columnNames[1] = lay.getShortNameByName(PayloadWOD.WOD_UPTIME);
+		} else {
+			columnNames[0] = "EPOCH";
+			columnNames[1] = "UPTIME";
+		}
 		for (int k=0; k<columnNames.length-2; k++) 
 			columnNames[k+2] = lay.fieldName[k];
 	}

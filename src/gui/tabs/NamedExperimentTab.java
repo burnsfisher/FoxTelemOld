@@ -190,10 +190,10 @@ public class NamedExperimentTab extends ExperimentTab implements ItemListener, R
 
 		TableColumn column = null;
 		column = table.getColumnModel().getColumn(0);
-		column.setPreferredWidth(45);
+		column.setPreferredWidth(10+7*table.getColumnName(0).length());
 		
 		column = table.getColumnModel().getColumn(1);
-		column.setPreferredWidth(55);
+		column.setPreferredWidth(10+7*table.getColumnName(0).length());
 		
 		for (int i=0; i<table.getColumnCount()-2; i++) {
 			column = table.getColumnModel().getColumn(i+2);
@@ -202,10 +202,10 @@ public class NamedExperimentTab extends ExperimentTab implements ItemListener, R
 		}
 		
 		column = table2.getColumnModel().getColumn(0);
-		column.setPreferredWidth(45);
+		column.setPreferredWidth(10+7*table.getColumnName(0).length());
 		
 		column = table2.getColumnModel().getColumn(1);
-		column.setPreferredWidth(55);
+		column.setPreferredWidth(10+7*table.getColumnName(0).length());
 		
 		for (int i=0; i<table2.getColumnCount()-2; i++) {
 			column = table2.getColumnModel().getColumn(i+2);

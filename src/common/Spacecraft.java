@@ -590,7 +590,6 @@ public class Spacecraft implements Comparable<Spacecraft> {
 	}
 	
 	
-	
 	/**
 	 * Calculate the position at a historical data/time
 	 * Typically we don't call this directly.  Instead we call with the reset/uptime and hope that the value is already cached
